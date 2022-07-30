@@ -14,18 +14,18 @@ const { PORT = 3002 } = process.env;
 
 const app = express();
 
-mongoose.connect(
-  'mongodb+srv://admin:e5itqIinKQaL53Y2@moviesexplorer.u1gobm1.mongodb.net/test',
-  {
-    useNewUrlParser: true,
-  },
-);
+// mongoose.connect(
+//   'mongodb+srv://admin:e5itqIinKQaL53Y2@moviesexplorer.u1gobm1.mongodb.net/test',
+//   {
+//     useNewUrlParser: true,
+//   },
+// );
 
-// mongoose.connect('mongodb://localhost:27017/rateLimits', {
-//   useUnifiedTopology: true,
-//   useNewUrlParser: true,
-//   autoIndex: true,
-// });
+mongoose.connect('mongodb://moviesdb:LKW1ofxojE25z7BM@localhost:27017/moviesdb?authSource=admin', {
+  useUnifiedTopology: true,
+  useNewUrlParser: true,
+  autoIndex: true,
+});
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
