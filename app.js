@@ -12,16 +12,17 @@ const { requestLogger, errorLogger } = require('./middlewares/logger');
 
 const { PORT = 3002 } = process.env;
 
+let mongoURI;
+
+if (process.env.NODE_ENV === 'production') {
+  mongoURI = process.env.MONGO_DB_PROD;
+} else if (process.env.NODE_ENV === 'development') {
+  mongoURI = process.env.MONGO_DB_DEV;
+}
+
 const app = express();
 
-// mongoose.connect(
-//   'mongodb+srv://admin:e5itqIinKQaL53Y2@moviesexplorer.u1gobm1.mongodb.net/test',
-//   {
-//     useNewUrlParser: true,
-//   },
-// );
-
-mongoose.connect('mongodb://moviesdb:LKW1ofxojE25z7BM@localhost:27017/moviesdb?authSource=admin', {
+mongoose.connect(mongoURI, {
   useUnifiedTopology: true,
   useNewUrlParser: true,
   autoIndex: true,
