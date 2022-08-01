@@ -12,7 +12,7 @@ const updateProfile = async (req, res, next) => {
 
     const candidate = await User.findOne({ email });
 
-    if (!candidate) {
+    if (candidate) {
       return next(new ConflictError('Email уже используется'));
     }
 

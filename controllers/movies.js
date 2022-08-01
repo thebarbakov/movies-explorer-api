@@ -57,7 +57,7 @@ const createMovie = async (req, res, next) => {
 
 const deleteMovie = async (req, res, next) => {
   try {
-    const movie = await Movie.findOne({ _id: req.params.movieId });
+    const movie = await Movie.findOne({ _id: req.params.id });
 
     if (!movie) {
       return next(new NotFound('Запрашиваемый фильм для удаления не найдена'));
@@ -67,7 +67,7 @@ const deleteMovie = async (req, res, next) => {
       return next(new ForbiddenError('Фильм недоступен для удаления'));
     }
 
-    await Movie.findOneAndDelete({ _id: req.params.movieId });
+    await Movie.findOneAndDelete({ _id: req.params.id });
 
     return res.status(200).json({ message: 'Ok!' });
   } catch (e) {
