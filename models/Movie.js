@@ -53,7 +53,7 @@ const movieSchema = new Schema(
       required: true,
     },
     movieId: {
-      type: Types.ObjectId,
+      type: Number,
       required: true,
     },
     nameRU: {

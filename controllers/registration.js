@@ -16,13 +16,13 @@ const signIn = async (req, res, next) => {
     const user = await User.findOne({ email }, '+password');
 
     if (!user) {
-      return next(new UnauthorizedError('Неверный email'));
+      return next(new UnauthorizedError('Неправильная почта или пароль'));
     }
 
     const isMatch = await bcrypt.compare(password, user.password);
 
     if (!isMatch) {
-      return next(new UnauthorizedError('Пароль не верен'));
+      return next(new UnauthorizedError('Неправильная почта или пароль'));
     }
 
     const token = jwt.sign(

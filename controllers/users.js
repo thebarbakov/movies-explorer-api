@@ -2,18 +2,25 @@ require('dotenv').config();
 
 const NotFound = require('../errors/NotFound');
 const CastError = require('../errors/CastError');
+const ConflictError = require('../errors/ConflictError');
 
 const User = require('../models/User');
 
 const updateProfile = async (req, res, next) => {
   try {
-    const { name, about } = req.body;
+    const { name, email } = req.body;
+
+    const candidate = await User.findOne({ email });
+
+    if (!candidate) {
+      return next(new ConflictError('Email уже используется'));
+    }
 
     const user = await User.findOneAndUpdate(
       { _id: req.user._id },
       {
         name,
-        about,
+        email,
       },
       { new: true, runValidators: true },
     );
