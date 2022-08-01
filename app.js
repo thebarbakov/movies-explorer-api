@@ -17,7 +17,13 @@ let mongoURI;
 if (process.env.NODE_ENV === 'production') {
   mongoURI = process.env.MONGO_DB_PROD;
 } else if (process.env.NODE_ENV === 'development') {
-  mongoURI = process.env.MONGO_DB_DEV;
+  // mongoURI = process.env.MONGO_DB_DEV;
+  //
+  // URI для подключения для production и edvelopment лежит в файле .env,
+  // но там есть логин и пароль для подключения
+  // к базе данных, которые в публичный доступ выкладывать не совсем здорово
+  //
+  mongoURI = 'mongodb://localhost:27017/moviesdb';
 }
 
 const app = express();
